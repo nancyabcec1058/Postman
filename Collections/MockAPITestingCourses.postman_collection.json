@@ -1,0 +1,208 @@
+{
+  "info": {
+    "_postman_id": "954d6bed-6850-4240-afa7-7b2cd2ebfb33",
+    "name": "MockAPITestingCourses",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49404144"
+  },
+  "item": [
+    {
+      "name": "getapitestingcourses",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData=pm.response.json()\r",
+              "pm.test(\"Verify category\",()=>\r",
+              "{\r",
+              "jsonData.data.forEach(function(item)\r",
+              "{\r",
+              "    if(item.category=='Javascript')\r",
+              "    {\r",
+              "        pm.environment.set('course',item.category)\r",
+              "    }\r",
+              "})\r",
+              "\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{url}}/getapitestingcourses",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "getapitestingcourses"
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "Default",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/getapitestingcourses",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "getapitestingcourses"
+              ]
+            }
+          },
+          "code": 200,
+          "_postman_previewlanguage": null,
+          "header": null,
+          "cookie": [],
+          "body": "{\n    \"data\": [\n        {\n            \"course\": \"Postman\",\n            \"price\": 150,\n            \"category\": \"Javascript\"\n        },\n        {\n            \"course\": \"SoapUI\",\n            \"price\": 25,\n            \"category\": \"Groovy\"\n        },\n        {\n            \"course\": \"RestAssured\",\n            \"price\": 100,\n            \"category\": \"Java\"\n        },\n        {\n            \"course\": \"RestAssured\",\n            \"price\": 100,\n            \"category\": \"Java\"\n        }\n    ]\n}\n"
+        }
+      ]
+    },
+    {
+      "name": "GetCourseDetails",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData=pm.response.json()\r",
+              "pm.expect(jsonData.students>10000).to.be.true;\r",
+              "pm.expect(jsonData.category).to.eql('java');"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": ""
+        },
+        "url": {
+          "raw": "{{url}}/getcoursedetails?name={{course}}",
+          "host": [
+            "{{url}}"
+          ],
+          "path": [
+            "getcoursedetails"
+          ],
+          "query": [
+            {
+              "key": "name",
+              "value": "{{course}}"
+            }
+          ]
+        }
+      },
+      "response": [
+        {
+          "name": "GetCourseDetails",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/getcoursedetails?name={{course}}",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "getcoursedetails"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "{{course}}"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n    \"name\": \"postman\",\r\n    \"category\": \"javascript\",\r\n    \"content\": \"videos\",\r\n    \"length\": \"15hours\",\r\n    \"students\": 12342\r\n}\r\n"
+        },
+        {
+          "name": "GetCourseDetails",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{url}}/getcoursedetails?name=Rest Assured",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "getcoursedetails"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "Rest Assured"
+                }
+              ]
+            }
+          },
+          "_postman_previewlanguage": "",
+          "header": [],
+          "cookie": [
+            {
+              "expires": "Invalid Date",
+              "domain": "",
+              "path": ""
+            }
+          ],
+          "body": "{\r\n\"name\": \"Rest Assured\",\r\n\"category\": \"java\",\r\n\"content\": \"videos\",\r\n\"length\": \"20hours\",\r\n\"students\": 11500\r\n}"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "https://4e4b89fa-e4f8-4912-8bdc-528ece757567.mock.pstmn.io"
+    }
+  ]
+}

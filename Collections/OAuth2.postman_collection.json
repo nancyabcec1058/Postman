@@ -1,0 +1,271 @@
+{
+  "info": {
+    "_postman_id": "1c71512f-067f-4924-bbb5-a6e6960a8204",
+    "name": "OAuth2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49404144"
+  },
+  "item": [
+    {
+      "name": "GetAuthCode",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://accounts.google.com/o/oauth2/v2/auth?scope=https://www.googleapis.com/auth/userinfo.email&auth_url=https://accounts.google.com/o/oauth2/v2/auth&client_id=692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com&response_type=code&redirect_uri=https://rahulshettyacademy.com/getCourse.php&state=de67ygr",
+          "protocol": "https",
+          "host": [
+            "accounts",
+            "google",
+            "com"
+          ],
+          "path": [
+            "o",
+            "oauth2",
+            "v2",
+            "auth"
+          ],
+          "query": [
+            {
+              "key": "scope",
+              "value": "https://www.googleapis.com/auth/userinfo.email"
+            },
+            {
+              "key": "auth_url",
+              "value": "https://accounts.google.com/o/oauth2/v2/auth"
+            },
+            {
+              "key": "client_id",
+              "value": "692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com"
+            },
+            {
+              "key": "response_type",
+              "value": "code"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://rahulshettyacademy.com/getCourse.php"
+            },
+            {
+              "key": "state",
+              "value": "de67ygr"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ExchangeCode",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData=pm.response.json()\r",
+              "const access_token=jsonData.access_token\r",
+              "pm.globals.set(\"access_token\",access_token)"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "oauth2",
+          "oauth2": [
+            {
+              "key": "tokenName",
+              "value": "",
+              "type": "string"
+            },
+            {
+              "key": "addTokenTo",
+              "value": "header",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "https://www.googleapis.com/oauth2/v4/token?code={{auth_code}}&client_id=692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com&client_secret=erZOWM9g3UtwNRj340YYaK_W&redirect_uri=https://rahulshettyacademy.com/getCourse.php&grant_type=authorization_code",
+          "protocol": "https",
+          "host": [
+            "www",
+            "googleapis",
+            "com"
+          ],
+          "path": [
+            "oauth2",
+            "v4",
+            "token"
+          ],
+          "query": [
+            {
+              "key": "code",
+              "value": "{{auth_code}}"
+            },
+            {
+              "key": "client_id",
+              "value": "692183103107-p0m7ent2hk7suguv4vq22hjcfhcr43pj.apps.googleusercontent.com"
+            },
+            {
+              "key": "client_secret",
+              "value": "erZOWM9g3UtwNRj340YYaK_W"
+            },
+            {
+              "key": "redirect_uri",
+              "value": "https://rahulshettyacademy.com/getCourse.php"
+            },
+            {
+              "key": "grant_type",
+              "value": "authorization_code"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "ActualRequest",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "const jsonData={ \r",
+              "    \"instructor\": \"RahulShetty\",\r",
+              "    \"url\": \"rahulshettycademy.com\", \r",
+              "    \"services\": \"projectSupport\", \r",
+              "    \"expertise\": \"Automation\",\r",
+              "    \"courses\": \r",
+              "{ \"webAutomation\": \r",
+              "[ \r",
+              "    { \"courseTitle\": \"Selenium Webdriver Java\", \"price\": \"50\" }, \r",
+              "    { \"courseTitle\": \"Cypress\",\"price\": \"40\"},\r",
+              "    {\"courseTitle\": \"Protractor\",\"price\": \"40\"}\r",
+              "],\r",
+              "\"api\": \r",
+              "[\r",
+              "   {\"courseTitle\": \"Rest Assured Automation using Java\",\"price\": \"50\"},\r",
+              "   {\"courseTitle\": \"SoapUI Webservices testing\",\"price\": \"40\"}\r",
+              "],\r",
+              "\"mobile\": [\r",
+              "   {\"courseTitle\": \"Appium-Mobile Automation using Java\",\"price\": \"50\"}\r",
+              "]\r",
+              "},\r",
+              "\"linkedIn\": \"https://www.linkedin.com/in/rahul-shetty-trainer/\"\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData={ \r",
+              "    \"instructor\": \"RahulShetty\",\r",
+              "    \"url\": \"rahulshettycademy.com\", \r",
+              "    \"services\": \"projectSupport\", \r",
+              "    \"expertise\": \"Automation\",\r",
+              "    \"courses\": \r",
+              "{ \"webAutomation\": \r",
+              "[ \r",
+              "    { \"courseTitle\": \"Selenium Webdriver Java\", \"price\": \"50\" }, \r",
+              "    { \"courseTitle\": \"Cypress\",\"price\": \"40\"},\r",
+              "    {\"courseTitle\": \"Protractor\",\"price\": \"40\"}\r",
+              "],\r",
+              "\"api\": \r",
+              "[\r",
+              "   {\"courseTitle\": \"Rest Assured Automation using Java\",\"price\": \"50\"},\r",
+              "   {\"courseTitle\": \"SoapUI Webservices testing\",\"price\": \"40\"}\r",
+              "],\r",
+              "\"mobile\": [\r",
+              "   {\"courseTitle\": \"Appium-Mobile Automation using Java\",\"price\": \"50\"}\r",
+              "]\r",
+              "},\r",
+              "\"linkedIn\": \"https://www.linkedin.com/in/rahul-shetty-trainer/\"\r",
+              "}\r",
+              "const expectedCourses=[\"Selenium Webdriver Java\",\"Cypress\",\"Protractor\"]\r",
+              "const actualCourses=[]\r",
+              "var cypressObj;\r",
+              "pm.test(\"course test\",()=>\r",
+              "{\r",
+              "    cypressObj=jsonData.courses.webAutomation.find(m=>m.courseTitle==='Cypress')\r",
+              "    pm.expect(cypressObj).to.be.an('object')\r",
+              "    \r",
+              "})\r",
+              "pm.test(\"verify cypress properties\",()=>\r",
+              "{\r",
+              "  pm.expect(cypressObj).to.have.all.keys(\"courseTitle\",\"price\")\r",
+              "})\r",
+              "pm.test(\"sum of api courses\",()=>\r",
+              "{\r",
+              "    let apiCourses=jsonData.courses.api\r",
+              "    let total=apiCourses.reduce((sum,course)=>sum+Number(course.price),0)\r",
+              "    console.log(total);\r",
+              "    let sum=0;\r",
+              "    for(let i=0;i<apiCourses.length;i++)\r",
+              "    {\r",
+              "        sum=sum+parseInt(apiCourses[i].price);\r",
+              "    }\r",
+              "    console.log(sum);\r",
+              "})\r",
+              "\r",
+              "pm.test(\"Validate web courses title\",()=>\r",
+              "{\r",
+              "    jsonData.courses.webAutomation.map(m=>actualCourses.push(m.courseTitle))\r",
+              "    console.log(actualCourses);\r",
+              "    pm.expect(expectedCourses).to.be.eql(actualCourses);\r",
+              "\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://rahulshettyacademy.com/getCourse.php?access_token={{access_token}}",
+          "protocol": "https",
+          "host": [
+            "rahulshettyacademy",
+            "com"
+          ],
+          "path": [
+            "getCourse.php"
+          ],
+          "query": [
+            {
+              "key": "access_token",
+              "value": "{{access_token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

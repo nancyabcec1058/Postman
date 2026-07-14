@@ -1,0 +1,194 @@
+{
+  "info": {
+    "_postman_id": "6e9c330f-287f-4242-bb2f-541640dee5ce",
+    "name": "GraphQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49404144"
+  },
+  "item": [
+    {
+      "name": "CreateLocation",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData=pm.response.json()\r",
+              "pm.collectionVariables.set(\"locationId\",jsonData.data.createLocation.id)"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation($locationName:String!)\r\n{\r\n  createLocation(location:{name:$locationName,type:\"North-east\",dimension:\"456\"})\r\n  {\r\n    id\r\n  }\r\n}",
+            "variables": "{\r\n  \"locationName\":\"Japan\"\r\n}"
+          }
+        },
+        "url": {
+          "raw": "https://rahulshettyacademy.com/gq/graphql",
+          "protocol": "https",
+          "host": [
+            "rahulshettyacademy",
+            "com"
+          ],
+          "path": [
+            "gq",
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "CreateMutations",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData=pm.response.json()\r",
+              "pm.collectionVariables.set(\"characterId\",jsonData.data.createCharacter.id)\r",
+              "pm.collectionVariables.set(\"episodeId\",jsonData.data.createEpisode.id)\r",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation($characterName:String!,$episodeName:String!,$originId:Int!,$locationId:Int!)\r\n{\r\n  createCharacter(character:{name:$characterName,type:\"abc\",status:\"alive\",species:\"human\",gender:\"female\",image:\"jpg\",originId:$originId,locationId:$locationId})\r\n  {\r\n    id\r\n  }\r\n  createEpisode(episode:{name:$episodeName,air_date:\"02-09-1996\",episode:\"25\"})\r\n  {\r\n    id\r\n  }\r\n}",
+            "variables": "{\r\n  \"characterName\":\"{{characterName}}\",\r\n  \"episodeName\":\"{{episodeName}}\",\r\n  \"originId\":{{locationId}},\r\n  \"locationId\":{{locationId}}\r\n}"
+          }
+        },
+        "url": {
+          "raw": "https://rahulshettyacademy.com/gq/graphql",
+          "protocol": "https",
+          "host": [
+            "rahulshettyacademy",
+            "com"
+          ],
+          "path": [
+            "gq",
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Query",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "query($characterId:Int!,$episodeId:Int!,$locationId:Int!)\r\n{\r\n  character(characterId: $characterId) {\r\n    name\r\n    gender\r\n    status\r\n    id\r\n  }\r\n  location(locationId: $locationId) {\r\n    name\r\n    dimension\r\n  }\r\n  episode(episodeId: $episodeId) {\r\n    name\r\n    air_date\r\n    episode\r\n  }\r\n  characters(filters:{name:\"{{characterName}}\"})\r\n  {\r\n    info\r\n    {\r\n      count\r\n    }\r\n    result\r\n    {\r\n      name\r\n      type\r\n    }\r\n    \r\n  }\r\n  episodes(filters:{name:\"{{episodeName}}\"})\r\n  {\r\n    result\r\n    {\r\n      id\r\n      name\r\n      air_date\r\n    }\r\n  }\r\n}\r\n",
+            "variables": "{\r\n  \"characterId\":{{characterId}},\r\n  \"episodeId\":{{episodeId}},\r\n  \"locationId\":{{locationId}}\r\n  \r\n}"
+          }
+        },
+        "url": {
+          "raw": "https://rahulshettyacademy.com/gq/graphql",
+          "protocol": "https",
+          "host": [
+            "rahulshettyacademy",
+            "com"
+          ],
+          "path": [
+            "gq",
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DeleteMutations",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "graphql",
+          "graphql": {
+            "query": "mutation($locationIds:[Int!],$episodeIds:[Int!],$characterIds:[Int!])\r\n{\r\n  \r\n  deleteLocations(locationIds:$locationIds)\r\n  {\r\n    locationsDeleted\r\n  }\r\n  deleteCharacters(characterIds:$characterIds)\r\n  {\r\n    charactersDeleted\r\n  }\r\n  deleteEpisodes(episodeIds:$episodeIds)\r\n  {\r\n    episodesDeleted\r\n  }\r\n}",
+            "variables": "{\r\n  \"locationIds\": [34275],\r\n  \"episodeIds\": [23190],\r\n  \"characterIds\": [25679]\r\n}"
+          }
+        },
+        "url": {
+          "raw": "https://rahulshettyacademy.com/gq/graphql",
+          "protocol": "https",
+          "host": [
+            "rahulshettyacademy",
+            "com"
+          ],
+          "path": [
+            "gq",
+            "graphql"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "locationId",
+      "value": ""
+    },
+    {
+      "key": "characterId",
+      "value": ""
+    },
+    {
+      "key": "episodeId",
+      "value": ""
+    },
+    {
+      "key": "characterName",
+      "value": ""
+    },
+    {
+      "key": "episodeName",
+      "value": ""
+    }
+  ]
+}
