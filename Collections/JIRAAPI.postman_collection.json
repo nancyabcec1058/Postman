@@ -1,0 +1,213 @@
+{
+  "info": {
+    "_postman_id": "7ef0f92b-25ab-4eaf-aabe-8d38dcbe1df8",
+    "name": "JIRAAPI",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "49404144"
+  },
+  "item": [
+    {
+      "name": "CreateBug",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const jsonData=pm.response.json()\r",
+              "pm.collectionVariables.set(\"issueID\",jsonData.id)\r",
+              "pm.test(\"Check Issue created\",()=>\r",
+              "{\r",
+              "    pm.response.to.have.status(201);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic bmFuY3llYzEwNThAZ21haWwuY29tOkFUQVRUM3hGZkdGMEZvbFVidldMOTVOUTdBUXUyMVR4NlFYaEo2WWhEOW5jeGVBbmN0dHltckx1YTVBd2ZyckFFM2ExNUUtRE8zTW56ajBQMU9UaVh5OXNLTFJOcHkzakFvY2hLODJZamVNSkY2MkVJRmFRN1FkN0w0VWZId1hhTGtUc29YR2I2Q0tvdmtndlFoLTVrWUVaSzlsaVE0WjB5TGZBdGcxM0hCelJ5Z21PUTNSSnJ1WT1FRDQxMjkwQQ==",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"fields\": {\r\n    \"project\": {\r\n      \"key\": \"SCRUM\"\r\n    },\r\n    \"summary\": \"Text field not working\",\r\n    \"description\": {\r\n      \"type\": \"doc\",\r\n      \"version\": 1,\r\n      \"content\": [\r\n        {\r\n          \"type\": \"paragraph\",\r\n          \"content\": [\r\n            {\r\n              \"type\": \"text\",\r\n              \"text\": \"Creating of an issue using project keys and issue type names using the REST API\"\r\n            }\r\n          ]\r\n        }\r\n      ]\r\n    },\r\n    \"issuetype\": {\r\n      \"name\": \"Bug\"\r\n    }\r\n  }\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://nancyec1058.atlassian.net/rest/api/3/issue",
+          "protocol": "https",
+          "host": [
+            "nancyec1058",
+            "atlassian",
+            "net"
+          ],
+          "path": [
+            "rest",
+            "api",
+            "3",
+            "issue"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "AddAttachement",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Check Issue created\",()=>\r",
+              "{\r",
+              "    pm.response.to.have.status(201);\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-Atlassian-Token",
+            "value": "no-check",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Basic bmFuY3llYzEwNThAZ21haWwuY29tOkFUQVRUM3hGZkdGMEZvbFVidldMOTVOUTdBUXUyMVR4NlFYaEo2WWhEOW5jeGVBbmN0dHltckx1YTVBd2ZyckFFM2ExNUUtRE8zTW56ajBQMU9UaVh5OXNLTFJOcHkzakFvY2hLODJZamVNSkY2MkVJRmFRN1FkN0w0VWZId1hhTGtUc29YR2I2Q0tvdmtndlFoLTVrWUVaSzlsaVE0WjB5TGZBdGcxM0hCelJ5Z21PUTNSSnJ1WT1FRDQxMjkwQQ==",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "uuid": "085d0639-8fdc-4279-b436-4e64a3c93f43",
+              "src": "/C:/Users/nancy/Downloads/Postman/JiraIssue.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "https://nancyec1058.atlassian.net/rest/api/3/issue/{{issueID}}/attachments",
+          "protocol": "https",
+          "host": [
+            "nancyec1058",
+            "atlassian",
+            "net"
+          ],
+          "path": [
+            "rest",
+            "api",
+            "3",
+            "issue",
+            "{{issueID}}",
+            "attachments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "DeleteIssue",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Check Issue created\",()=>\r",
+              "{\r",
+              "    pm.response.to.have.status(\"204 No Content\");\r",
+              "})"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Basic bmFuY3llYzEwNThAZ21haWwuY29tOkFUQVRUM3hGZkdGMEZvbFVidldMOTVOUTdBUXUyMVR4NlFYaEo2WWhEOW5jeGVBbmN0dHltckx1YTVBd2ZyckFFM2ExNUUtRE8zTW56ajBQMU9UaVh5OXNLTFJOcHkzakFvY2hLODJZamVNSkY2MkVJRmFRN1FkN0w0VWZId1hhTGtUc29YR2I2Q0tvdmtndlFoLTVrWUVaSzlsaVE0WjB5TGZBdGcxM0hCelJ5Z21PUTNSSnJ1WT1FRDQxMjkwQQ==",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://nancyec1058.atlassian.net/rest/api/3/issue/{{issueID}}",
+          "protocol": "https",
+          "host": [
+            "nancyec1058",
+            "atlassian",
+            "net"
+          ],
+          "path": [
+            "rest",
+            "api",
+            "3",
+            "issue",
+            "{{issueID}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "issueID",
+      "value": ""
+    }
+  ]
+}
